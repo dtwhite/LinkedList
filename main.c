@@ -103,6 +103,16 @@ static inline void test_remove_element_multiple(){
 }
 
 /** 
+ * Tests the case of removing from an empty linked list
+*/
+static inline void test_remove_element_empty(){
+	struct linked_list *list = ll_create();
+	void *rmVal = ll_remove_first(list);
+	if(rmVal == NULL)
+		printf("The removal method correctly handled removal on a empty list\n\n");
+}
+
+/** 
  * Tests whether a linked list will be freed 
  * when there are elements cotained within
  * the list. 
@@ -176,6 +186,7 @@ int main(void){
 	test_add_element_multiple();
 	test_remove_element();
 	test_remove_element_multiple();
+	test_remove_element_empty();
 	test_ll_destroy_fail();
 	test_ll_destroy_success();
 	test_contains_value();
