@@ -25,8 +25,10 @@ static inline void print_list(struct linked_list *ll){
 */
 static inline void test_createLinkedList(){
 	struct linked_list *list = ll_create();
-	int val = ll_length(list);
-	print_list(list);
+	if(list == NULL)
+		printf("The list was not created\n\n");
+	else
+		printf("The list was successfully created\n\n");
 }
 
 /**
@@ -39,6 +41,7 @@ static inline void test_add_element(){
 	int test_value = 4;
 	void *valPtr = &test_value;
 	ll_add(list, valPtr);
+	printf("The expected output is [4] with a length of 1. The output is: \n");
 	print_list(list);
 }
 
