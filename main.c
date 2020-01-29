@@ -15,8 +15,8 @@ static inline void print_list(struct linked_list *ll){
 		if(node != NULL)
 			printf(", ");		
 	}
-	printf("]\n");
-	printf("The length of the list is %d\n\n", ll_length(ll));
+	printf("] ");
+	printf("with the list's length being %d\n\n", ll_length(ll));
 }
 
 /**
@@ -24,6 +24,7 @@ static inline void print_list(struct linked_list *ll){
  * initiated when ll_create() is called.
 */
 static inline void test_createLinkedList(){
+	printf("=======Testing ll_create()================\n");
 	struct linked_list *list = ll_create();
 	if(list == NULL)
 		printf("The list was not created\n\n");
@@ -37,11 +38,10 @@ static inline void test_createLinkedList(){
  * properly.
 */
 static inline void test_add_element(){
+	printf("=======Testing add_element()================\n");
 	struct linked_list *list = ll_create();
-	int test_value = 4;
-	void *valPtr = &test_value;
-	ll_add(list, valPtr);
-	printf("The expected output is [4] with a length of 1. The output is: \n");
+	ll_add(list, 4);
+	printf("I inserted the element 4 into the list. The expected output is [4] with a length of 1. \nThe output is: ");
 	print_list(list);
 }
 
@@ -58,10 +58,10 @@ static inline void test_add_element_multiple(){
 	void *valPtr1 = &test_value1;
 	void *valPtr2 = &test_value2;
 	void *valPtr3 = &test_value3;
-	ll_add(list, valPtr1);
-	ll_add(list, valPtr2);
-	ll_add(list, valPtr3);
-	printf("The expected output is [6, 5, 4] with a length of 3. The output is: \n");
+	ll_add(list, 4);
+	ll_add(list, 5);
+	ll_add(list, 6);
+	printf("The expected output is [6, 5, 4] with a length of 3.\nThe output is: ");
 	print_list(list); 
 }
 
@@ -69,18 +69,13 @@ static inline void test_add_element_multiple(){
  * Test the removal of the beginning element in the linked list
 */
 static inline void test_remove_element(){
+	printf("=======Testing ll_remove_first()================\n");
 	struct linked_list *list = ll_create();
-	int test_value1 = 4;
-	int test_value2 = 5;
-	int test_value3 = 6;
-	void *valPtr1 = &test_value1;
-	void *valPtr2 = &test_value2;
-	void *valPtr3 = &test_value3;
-	ll_add(list, valPtr1);
-	ll_add(list, valPtr2);
-	ll_add(list, valPtr3);
+	ll_add(list,4);
+	ll_add(list, 5);
+	ll_add(list, 6);
 	ll_remove_first(list);
-	printf("The expected output is [5, 4] with a length of 2. The output is \n");
+	printf("The expected output is [5, 4] with a length of 2.\nThe output is: ");
 	print_list(list);
 }
 
@@ -89,19 +84,13 @@ static inline void test_remove_element(){
 */
 static inline void test_remove_element_multiple(){
 	struct linked_list *list = ll_create();
-	int test_value1 = 4;
-	int test_value2 = 5;
-	int test_value3 = 6;
-	void *valPtr1 = &test_value1;
-	void *valPtr2 = &test_value2;
-	void *valPtr3 = &test_value3;
-	ll_add(list, valPtr1);
-	ll_add(list, valPtr2);
+	ll_add(list, 4);
+	ll_add(list, 5);
 	ll_remove_first(list);
-	ll_add(list, valPtr3);
+	ll_add(list, 6);
 	ll_remove_first(list);
-	ll_add(list, valPtr1);
-	printf("The expected output is [4, 4] with a length of 2. The output is \n");
+	ll_add(list, 4);
+	printf("The expected output is [4, 4] with a length of 2.\nThe output is: ");
 	print_list(list);
 }
 
@@ -110,8 +99,8 @@ static inline void test_remove_element_multiple(){
 */
 static inline void test_remove_element_empty(){
 	struct linked_list *list = ll_create();
-	void *rmVal = ll_remove_first(list);
-	if(rmVal == NULL)
+	bool rmVal = ll_remove_first(list);
+	if(rmVal == true)
 		printf("The removal method correctly handled removal on a empty list\n\n");
 }
 
@@ -121,12 +110,11 @@ static inline void test_remove_element_empty(){
  * the list. 
 */
 static inline void test_ll_destroy_fail(){
+	printf("=======Testing ll_destroy()================\n");
 	struct linked_list *list = ll_create();
-	int test_val = 4;
-	void *valPtr = &test_val;
-	ll_add(list, valPtr);
+	ll_add(list, 4);
 	int result = ll_destroy(list);
-	printf("The expected output is 0. The output is: \n%d\n\n", result);
+	printf("Given the list [4], the expected output of ll_destroy(list) is 0.\nThe output is: %d\n\n", result);
 }
 
 /**
@@ -136,7 +124,7 @@ static inline void test_ll_destroy_fail(){
 static inline void test_ll_destroy_success(){
 	struct linked_list *list = ll_create();
 	int result = ll_destroy(list);
-	printf("The expected output is 1. The output is: \n%d\n\n", result);
+	printf("Given the list [], the expected output of ll_destroy(list) is 1.\nThe output is: %d\n\n", result);
 }
 
 /**
@@ -145,18 +133,13 @@ static inline void test_ll_destroy_success(){
 */
 
 static inline void test_contains_value(){
+	printf("=======Testing ll_contains()================\n");
 	struct linked_list *list = ll_create();
-	int test_value1 = 4;
-	int test_value2 = 5;
-	int test_value3 = 6;
-	void *valPtr1 = &test_value1;
-	void *valPtr2 = &test_value2;
-	void *valPtr3 = &test_value3;
-	ll_add(list, valPtr1);
-	ll_add(list, valPtr2);
-	ll_add(list, valPtr3);
-	int result = ll_contains(list, valPtr1);
-	printf("The expected output is 3. The output is: \n%d\n\n", result);
+	ll_add(list, 4);
+	ll_add(list, 5);
+	ll_add(list, 6);
+	int result = ll_contains(list, 4);
+	printf("Given the list [6, 5, 4], the expected output of ll_contains(list, 4) is 3.\nThe output is: %d\n\n", result);
 }
 
 /** 
@@ -166,19 +149,11 @@ static inline void test_contains_value(){
 */
 static inline void test_does_not_contain_value(){
 	struct linked_list *list = ll_create();
-	int test_value1 = 4;
-	int test_value2 = 5;
-	int test_value3 = 6;
-	int test_value4 = 7;
-	void *valPtr1 = &test_value1;
-	void *valPtr2 = &test_value2;
-	void *valPtr3 = &test_value3;
-	void *valPtr4 = &test_value4;
-	ll_add(list, valPtr1);
-	ll_add(list, valPtr2);
-	ll_add(list, valPtr3);
-	int result = ll_contains(list, valPtr4);
-	printf("The expected output is 0. The output is: \n%d\n\n", result);
+	ll_add(list, 4);
+	ll_add(list, 5);
+	ll_add(list, 6);
+	int result = ll_contains(list, 7);
+	printf("Givne the list [6, 5, 4], the expected output of ll_contains(list, 7) is 0.\nThe output is: %d\n\n", result);
 }
 
 

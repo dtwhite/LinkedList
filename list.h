@@ -31,9 +31,9 @@ static inline int ll_destroy(struct linked_list *ll){
 	}
 }
 
-static inline void ll_add(struct linked_list *ll, void *value){
+static inline void ll_add(struct linked_list *ll, int value){
 	struct Node *node = (struct Node*)malloc(sizeof(struct Node));
-	node->value =  *(int*)value;
+	node->value = value;
 	node->next = ll->head;
 	ll->head = node;
 	ll->length++;
@@ -43,26 +43,24 @@ static inline int ll_length(struct linked_list *ll){
 	return ll->length;
 }
 
-static inline void * ll_remove_first(struct linked_list *ll){
+static inline bool ll_remove_first(struct linked_list *ll){
 	if(ll->length){
 		struct Node *deleteNode = ll->head;
-		int value = deleteNode->value;
 		ll->head = ll->head->next;
 		free(deleteNode);
-		void *valPtr = &value;
 		ll->length--;
-		return valPtr;
+		return true;
 	}
-	return NULL;
+	return false;
 	
 }
 
-static inline int ll_contains(struct linked_list *ll, void *value){
+static inline int ll_contains(struct linked_list *ll, int value){
 	bool isFound = false;
 	struct Node *ptr = ll->head;
 	int offset = 1;
 	while(ptr != NULL && !isFound){
-		if(ptr->value == *(int*)value)
+		if(ptr->value == value)
 			isFound = true;
 		else{
 			ptr = ptr->next;
