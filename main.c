@@ -52,12 +52,6 @@ static inline void test_add_element(){
 */
 static inline void test_add_element_multiple(){
 	struct linked_list *list = ll_create();
-	int test_value1 = 4;
-	int test_value2 = 5;
-	int test_value3 = 6;
-	void *valPtr1 = &test_value1;
-	void *valPtr2 = &test_value2;
-	void *valPtr3 = &test_value3;
 	ll_add(list, 4);
 	ll_add(list, 5);
 	ll_add(list, 6);
