@@ -94,7 +94,7 @@ static inline void test_remove_element_multiple(){
 static inline void test_remove_element_empty(){
 	struct linked_list *list = ll_create();
 	bool rmVal = ll_remove_first(list);
-	if(rmVal == true)
+	if(rmVal == false)
 		printf("The removal method correctly handled removal on a empty list\n\n");
 }
 
