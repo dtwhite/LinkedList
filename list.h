@@ -28,6 +28,7 @@ static inline int ll_destroy(struct linked_list *ll){
 		return 0;
 	else{
 		free(ll);
+		ll = NULL;
 		return 1;
 	}
 }
