@@ -2,6 +2,7 @@
 #define LIST_H
 #include <stdbool.h>
 #include <stdlib.h>
+#include <assert.h>
 
 struct Node{
 	int value;
@@ -33,6 +34,7 @@ static inline int ll_destroy(struct linked_list *ll){
 
 static inline void ll_add(struct linked_list *ll, int value){
 	struct Node *node = (struct Node*)malloc(sizeof(struct Node));
+	assert(node != NULL);
 	node->value = value;
 	node->next = ll->head;
 	ll->head = node;

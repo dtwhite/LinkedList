@@ -1,5 +1,6 @@
 #include "list.h"
 #include <stdio.h>
+#include <assert.h>
 
 /** 
  * Takes a linked_list struct pointer and prints out the 
@@ -150,6 +151,16 @@ static inline void test_does_not_contain_value(){
 	printf("Givne the list [6, 5, 4], the expected output of ll_contains(list, 7) is 0.\nThe output is: %d\n\n", result);
 }
 
+static inline void test_ll_destroy_then_use(){
+	struct linked_list *list = ll_create();
+	int result = ll_destroy(list);
+	assert(result == 1);
+	assert(list == NULL);
+	ll_add(list,1);
+
+	printf("%d\n", list->length);
+	printf("The value of list is: %d\n", list->head->value);
+}
 
 
 int main(void){
@@ -163,5 +174,6 @@ int main(void){
 	test_ll_destroy_success();
 	test_contains_value();
 	test_does_not_contain_value();
+	test_ll_destroy_then_use();
 	return 0;
 }
