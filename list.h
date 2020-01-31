@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+/**Daniel White**/
+
 struct Node{
 	int value;
 	struct Node *next;
