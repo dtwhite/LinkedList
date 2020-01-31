@@ -155,7 +155,7 @@ static inline void test_ll_destroy_then_use(){
 	struct linked_list *list = ll_create();
 	int result = ll_destroy(list);
 	assert(result == 1);
-	assert(list == NULL);
+	//assert(list == NULL);
 	ll_add(list,1);
 
 	printf("%d\n", list->length);
